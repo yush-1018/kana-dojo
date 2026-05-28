@@ -1,15 +1,12 @@
 'use client';
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Subset from './Subset';
 import KanaRowCard from './KanaRowCard';
 import KanaUnitSelector, { type KanaType } from './KanaUnitSelector';
 import { kana } from '@/features/Kana/data/kana';
 import { useClick } from '@/shared/hooks/generic/useAudio';
-import {
-  getKanaSelectorState,
-  saveKanaSelectorState,
-} from '@/shared/utils/selectorSessionStorage';
+import { useMenuSelectorStore } from '@/shared/ui-composite/Menu/store/useMenuSelectorStore';
 import { cardBorderStyles } from '@/shared/utils/styles';
 import { ChevronUp } from 'lucide-react';
 
@@ -124,27 +121,24 @@ interface KanaCardsProps {
 
 const KanaCards = ({ filter = 'all', viewMode }: KanaCardsProps) => {
   const { playClick } = useClick();
-  const [filterOverride, setFilterOverride] = useState<KanaType>(() => {
-    if (filter !== 'all' || viewMode !== 'full') return 'hiragana';
-    return getKanaSelectorState()?.selected ?? 'hiragana';
-  });
-  const [selectedSubset, setSelectedSubset] = useState<string>(() => {
-    if (filter !== 'all' || viewMode !== 'full') return 'base';
-    return getKanaSelectorState()?.selectedSubset ?? 'base';
-  });
-
-  useEffect(() => {
-    if (filter !== 'all' || viewMode !== 'full') return;
-    saveKanaSelectorState({
-      selected: filterOverride,
-      selectedSubset,
-    });
-  }, [filter, filterOverride, selectedSubset, viewMode]);
+  const persistedKanaSelection = useMenuSelectorStore(state => state.kana);
+  const setPersistedKanaSelection = useMenuSelectorStore(
+    state => state.setKanaSelection,
+  );
+  const [fallbackFilterOverride, setFallbackFilterOverride] =
+    useState<KanaType>('hiragana');
+  const [fallbackSelectedSubset, setFallbackSelectedSubset] =
+    useState<string>('base');
+  const shouldUsePersistedSelection = filter === 'all' && viewMode === 'full';
+  const filterOverride = shouldUsePersistedSelection
+    ? persistedKanaSelection.selected
+    : fallbackFilterOverride;
+  const selectedSubset = shouldUsePersistedSelection
+    ? persistedKanaSelection.selectedSubset
+    : fallbackSelectedSubset;
 
   const effectiveFilter: KanaCardsFilter =
-    USE_NEW_KANA_ROW_DESIGN && filter === 'all'
-      ? filterOverride
-      : filter;
+    USE_NEW_KANA_ROW_DESIGN && filter === 'all' ? filterOverride : filter;
 
   const filteredGroups = kanaGroups.filter(group => {
     if (effectiveFilter === 'hiragana') {
@@ -212,7 +206,8 @@ const KanaCards = ({ filter = 'all', viewMode }: KanaCardsProps) => {
     });
 
   const allKanaRowCards = useMemo(() => {
-    const cards: { globalIndex: number; kanaGroup: (typeof kana)[number] }[] = [];
+    const cards: { globalIndex: number; kanaGroup: (typeof kana)[number] }[] =
+      [];
     for (const subset of filteredSubsets) {
       for (let i = subset.sliceRange[0]; i < subset.sliceRange[1]; i++) {
         cards.push({ globalIndex: i, kanaGroup: kana[i] });
@@ -227,14 +222,32 @@ const KanaCards = ({ filter = 'all', viewMode }: KanaCardsProps) => {
         <div className='flex w-full flex-col gap-4'>
           <KanaUnitSelector
             selected={filterOverride}
-            onSelect={(type) => {
-              setFilterOverride(type);
-              setSelectedSubset('base');
+            onSelect={type => {
+              if (shouldUsePersistedSelection) {
+                setPersistedKanaSelection({
+                  selected: type,
+                  selectedSubset: 'base',
+                });
+                return;
+              }
+
+              setFallbackFilterOverride(type);
+              setFallbackSelectedSubset('base');
             }}
             selectedSubset={selectedSubset}
-            onSubsetSelect={setSelectedSubset}
+            onSubsetSelect={subset => {
+              if (shouldUsePersistedSelection) {
+                setPersistedKanaSelection({
+                  selected: filterOverride,
+                  selectedSubset: subset,
+                });
+                return;
+              }
+
+              setFallbackSelectedSubset(subset);
+            }}
           />
-          <div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3 items-start'>
+          <div className='grid w-full grid-cols-1 items-start gap-4 md:grid-cols-2 2xl:grid-cols-3'>
             {allKanaRowCards.map(card => (
               <KanaRowCard
                 key={`${card.globalIndex}-${card.kanaGroup.groupName}`}
@@ -252,8 +265,10 @@ const KanaCards = ({ filter = 'all', viewMode }: KanaCardsProps) => {
     <div className='flex w-full flex-col gap-2 sm:flex-row sm:items-start'>
       {(() => {
         const compactGroups = kanaGroups.filter(g => {
-          if (filter === 'hiragana') return g.name.toLowerCase().startsWith('hiragana');
-          if (filter === 'katakana') return g.name.toLowerCase().startsWith('katakana');
+          if (filter === 'hiragana')
+            return g.name.toLowerCase().startsWith('hiragana');
+          if (filter === 'katakana')
+            return g.name.toLowerCase().startsWith('katakana');
           return true;
         });
         const isSingleCompact = compactGroups.length === 1;
@@ -270,87 +285,88 @@ const KanaCards = ({ filter = 'all', viewMode }: KanaCardsProps) => {
                   cardBorderStyles,
                 )}
               >
-              {/* Group Header */}
-              <legend
-                className={clsx(
-                  'group flex flex-row items-center hover:cursor-pointer',
-                  USE_NEW_KANA_BADGE_DESIGN ? 'gap-2 text-[1.9rem]' : 'gap-1 text-2xl',
-                )}
-                onClick={() => toggleVisibility(group.name)}
-              >
-                <ChevronUp className={chevronClasses(groupHidden)} />
-                {USE_NEW_KANA_BADGE_DESIGN && (
-                  <span className={headingBadgeClasses.group}>
-                    {groupKanaBadgeByName[group.name] ?? 'あ'}
-                  </span>
-                )}
-                <h3 className='flex items-center gap-2'>
-                  <span>{mainTitle}</span>
-                  <span className='hidden text-(--secondary-color) xl:inline'>
-                    {japaneseTitle}
-                  </span>
-                </h3>
-              </legend>
+                {/* Group Header */}
+                <legend
+                  className={clsx(
+                    'group flex flex-row items-center hover:cursor-pointer',
+                    USE_NEW_KANA_BADGE_DESIGN
+                      ? 'gap-2 text-[1.9rem]'
+                      : 'gap-1 text-2xl',
+                  )}
+                  onClick={() => toggleVisibility(group.name)}
+                >
+                  <ChevronUp className={chevronClasses(groupHidden)} />
+                  {USE_NEW_KANA_BADGE_DESIGN && (
+                    <span className={headingBadgeClasses.group}>
+                      {groupKanaBadgeByName[group.name] ?? 'あ'}
+                    </span>
+                  )}
+                  <h3 className='flex items-center gap-2'>
+                    <span>{mainTitle}</span>
+                    <span className='hidden text-(--secondary-color) xl:inline'>
+                      {japaneseTitle}
+                    </span>
+                  </h3>
+                </legend>
 
-              {/* Subsets */}
-              {!groupHidden &&
-                group.subsets.map((subset, index) => {
-                  const subsetHidden = isHidden(subset.name);
-                  const isLastSubset = index === group.subsets.length - 1;
+                {/* Subsets */}
+                {!groupHidden &&
+                  group.subsets.map((subset, index) => {
+                    const subsetHidden = isHidden(subset.name);
+                    const isLastSubset = index === group.subsets.length - 1;
 
-                  return (
-                    <div
-                      key={subset.name}
-                      className='flex w-full flex-col gap-2'
-                    >
-                      <div>
-                        {/* Subset Header */}
-                        <h4
-                          className={clsx(
-                            'group flex flex-row items-center hover:cursor-pointer',
-                            USE_NEW_KANA_BADGE_DESIGN
-                              ? 'gap-2 text-[1.5rem]'
-                              : 'gap-1 text-xl',
+                    return (
+                      <div
+                        key={subset.name}
+                        className='flex w-full flex-col gap-2'
+                      >
+                        <div>
+                          {/* Subset Header */}
+                          <h4
+                            className={clsx(
+                              'group flex flex-row items-center hover:cursor-pointer',
+                              USE_NEW_KANA_BADGE_DESIGN
+                                ? 'gap-2 text-[1.5rem]'
+                                : 'gap-1 text-xl',
+                            )}
+                            onClick={() => toggleVisibility(subset.name)}
+                          >
+                            <ChevronUp
+                              className={chevronClasses(subsetHidden)}
+                              size={24}
+                            />
+                            {USE_NEW_KANA_BADGE_DESIGN && (
+                              <span className={headingBadgeClasses.subset}>
+                                {subsetKanaBadgeByName[subset.name] ?? 'あ'}
+                              </span>
+                            )}
+                            <span>{subset.name.slice(1)}</span>
+                          </h4>
+
+                          {/* Subset Content */}
+                          {!subsetHidden && (
+                            <Subset
+                              sliceRange={subset.sliceRange}
+                              group={group.name}
+                              subgroup={subset.name}
+                            />
                           )}
-                          onClick={() => toggleVisibility(subset.name)}
-                        >
-                          <ChevronUp
-                            className={chevronClasses(subsetHidden)}
-                            size={24}
-                          />
-                          {USE_NEW_KANA_BADGE_DESIGN && (
-                            <span className={headingBadgeClasses.subset}>
-                              {subsetKanaBadgeByName[subset.name] ?? 'あ'}
-                            </span>
-                          )}
-                          <span>{subset.name.slice(1)}</span>
-                        </h4>
+                        </div>
 
-                        {/* Subset Content */}
-                        {!subsetHidden && (
-                          <Subset
-                            sliceRange={subset.sliceRange}
-                            group={group.name}
-                            subgroup={subset.name}
-                          />
+                        {/* Divider (except after last subset) */}
+                        {!isLastSubset && (
+                          <hr className='w-full border-t border-(--border-color)' />
                         )}
                       </div>
-
-                      {/* Divider (except after last subset) */}
-                      {!isLastSubset && (
-                        <hr className='w-full border-t border-(--border-color)' />
-                      )}
-                    </div>
-                  );
-                })}
-            </form>
-          </Fragment>
-        );
-      });
-    })()}
+                    );
+                  })}
+              </form>
+            </Fragment>
+          );
+        });
+      })()}
     </div>
   );
 };
 
 export default KanaCards;
-

@@ -13,11 +13,9 @@ import SessionSummaryScreen from '@/shared/ui-composite/Game/SessionSummaryScree
 import StreakMilestoneOverlay from '@/shared/ui-composite/Game/StreakMilestoneOverlay';
 import { useRouter } from '@/core/i18n/routing';
 import { finalizeSession, startSession } from '@/shared/utils/sessionHistory';
-import { clearCollectionSelectorState } from '@/shared/utils/selectorSessionStorage';
+import { useMenuSelectorStore } from '@/shared/ui-composite/Menu/store/useMenuSelectorStore';
 import useClassicSessionStore from '@/shared/store/useClassicSessionStore';
-import {
-  shouldShowStreakMilestoneOverlay,
-} from '@/shared/utils/game/streakMilestones';
+import { shouldShowStreakMilestoneOverlay } from '@/shared/utils/game/streakMilestones';
 
 const Game = () => {
   const {
@@ -64,6 +62,9 @@ const Game = () => {
   const setActiveSessionId = useClassicSessionStore(
     state => state.setActiveSessionId,
   );
+  const resetCollectionSelection = useMenuSelectorStore(
+    state => state.resetCollectionSelection,
+  );
 
   useEffect(() => {
     if (view !== 'playing') return;
@@ -74,7 +75,7 @@ const Game = () => {
 
   useEffect(() => {
     resetStats();
-    clearCollectionSelectorState('vocabulary');
+    resetCollectionSelection('vocabulary');
     setSelectedVocabCollection('n5');
     setSelectedVocabSubunitForUnit('n5', '1-10');
     setActiveMilestone(null);
@@ -129,7 +130,7 @@ const Game = () => {
     <>
       <div
         key={sessionNonce}
-        className='flex min-h-[100dvh] max-w-[100dvw] flex-col items-center gap-8 px-2 md:px-0 md:gap-12'
+        className='flex min-h-[100dvh] max-w-[100dvw] flex-col items-center gap-8 px-2 md:gap-12 md:px-0'
       >
         {showStats && <SessionStats />}
         <Return isHidden={showStats} gameMode={gameMode} onQuit={handleQuit} />
@@ -184,4 +185,3 @@ const Game = () => {
 };
 
 export default Game;
-
