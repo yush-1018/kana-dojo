@@ -402,8 +402,10 @@
       "Sendai"
     ],
     "correctIndex": 0,
-    "issued": true,
-    "completed": false
+    "issued": false,
+    "completed": false,
+    "completedBy": "lvupupui",
+    "completedPR": 19205
   },
   {
     "id": 30,
