@@ -1408,7 +1408,7 @@
     "backgroundColor": "oklch(22.0% 0.018 230.0 / 1)",
     "mainColor": "oklch(80.0% 0.055 215.0 / 1)",
     "secondaryColor": "oklch(62.0% 0.045 240.0 / 1)",
-    "issued": false,
+    "issued": true,
     "completed": false,
     "completedBy": "veeresh4520",
     "completedPR": 19653
