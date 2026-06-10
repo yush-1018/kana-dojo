@@ -224,16 +224,16 @@
     "correctIndex": 0
   },
   {
-  "question": "Which Japanese food is a savory pancake cooked on a griddle?",
-  "difficulty": "easy",
-  "answers": ["Okonomiyaki", "Tempura", "Yakitori", "Sashimi"],
-  "correctIndex": 0
+    "question": "Which Japanese food is a savory pancake cooked on a griddle?",
+    "difficulty": "easy",
+    "answers": ["Okonomiyaki", "Tempura", "Yakitori", "Sashimi"],
+    "correctIndex": 0
   },
   {
-  "question": "What is the main ingredient in miso? (Community variation 56)",
-  "difficulty": "easy",
-  "answers": [ "Fermented soybeans",  "Rice flour",  "Buckwheat", "Seaweed"],
-  "correctIndex": 0
+    "question": "What is the main ingredient in miso? (Community variation 56)",
+    "difficulty": "easy",
+    "answers": ["Fermented soybeans", "Rice flour", "Buckwheat", "Seaweed"],
+    "correctIndex": 0
   },
   {
     "question": "Which ocean borders Japan to the east?",
@@ -245,5 +245,63 @@
       "Arctic Ocean"
     ],
     "correctIndex": 2
+  },
+  {
+    "question": "What is the Japanese term for a traditional inn? (Community variation 52)",
+    "difficulty": "easy",
+    "answers": ["Ryokan", "Minshuku", "Izakaya", "Yatai"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which animal is famously associated with Inari shrines in Japan? (Community variation 33)",
+    "difficulty": "easy",
+    "answers": ["Fox", "Crane", "Turtle", "Deer"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which Japanese city is known for the famous bamboo grove? (Community variation 31)",
+    "difficulty": "easy",
+    "answers": ["Kyoto", "Tokyo", "Sapporo", "Fukuoka"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the Japanese term for a shrine gate? (Community variation 60)",
+    "difficulty": "easy",
+    "answers": ["Torii", "Tori", "Toriya", "Torin"],
+    "correctIndex": 0
+  },
+  {
+    "question": "What is the Japanese term for a shrine gate? (Community variation 60)",
+    "difficulty": "easy",
+    "answers": ["Torii", "Tori", "Toriya", "Torin"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which city is famous for the Gion Matsuri festival? (Community variation 51)",
+    "difficulty": "easy",
+    "answers": ["Kyoto", "Sendai", "Sapporo", "Kobe"],
+    "correctIndex": 0
+  },
+  {
+    "question": "Which city is known for its snow festival and ice sculptures?",
+    "difficulty": "easy",
+    "answers": ["Sapporo", "Aomori", "Toyama", "Nagano"],
+    "correctIndex": 0
+  },
+
+  {
+    "id": 63,
+    "question": "Qual é a montanha mais alta do Japão?",
+    "options": ["Monte Aso", "Monte Kita", "Monte Fuji", "Monte Yari"],
+    "correctAnswer": "Monte Fuji",
+    "explanation": "O Monte Fuji é a montanha mais alta do Japão, com 3.776 metros de altitude."
+  },
+
+  {
+    "id": 22,
+    "question": "Como se chamava a cidade de Tóquio antes de 1868?",
+    "options": ["Kyoto", "Edo", "Osaka", "Nara"],
+    "correctAnswer": "Edo",
+    "explanation": "A cidade era conhecida como Edo até a Restauração Meiji."
   }
 ]
