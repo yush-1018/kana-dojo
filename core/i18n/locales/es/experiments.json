@@ -1,40 +1,40 @@
 {
-  "title": "Experiments",
-  "description": "Explore experimental features and alternative learning methods",
+  "title": "Experimentos",
+  "description": "Explora funciones experimentales y métodos de aprendizaje alternativos",
   "zenMode": {
-    "title": "Zen Mode",
-    "description": "Minimalist focus mode for distraction-free practice"
+    "title": "Modo Zen",
+    "description": "Modo de enfoque minimalista para practicar sin distracciones"
   },
   "breathing": {
-    "title": "Breathing Exercise",
-    "description": "Mindful breathing exercise to improve focus and reduce stress"
+    "title": "Ejercicio de respiración",
+    "description": "Ejercicio de respiración consciente para mejorar la concentración y reducir el estrés"
   },
   "ambient": {
-    "title": "Ambient Mode",
-    "description": "Practice with ambient background and soothing sounds"
+    "title": "Modo ambiental",
+    "description": "Practica con fondo ambiental y sonidos relajantes"
   },
   "constellation": {
-    "title": "Kana Constellation",
-    "description": "Connect the stars to form kana characters"
+    "title": "Constelación Kana",
+    "description": "Conecta las estrellas para formar caracteres kana"
   },
   "rain": {
-    "title": "Kana Rain",
-    "description": "Catch falling kana characters in this arcade-style game"
+    "title": "Lluvia de Kana",
+    "description": "Atrapa los caracteres kana que caen en este juego estilo arcade"
   },
   "memory": {
-    "title": "Memory Palace",
-    "description": "Use memory techniques to remember characters"
+    "title": "Palacio de la memoria",
+    "description": "Utiliza técnicas de memoria para recordar caracteres"
   },
   "sound": {
-    "title": "Sound Garden",
-    "description": "Learn through audio-visual associations"
+    "title": "Jardín del sonido",
+    "description": "Aprende a través de asociaciones audiovisuales"
   },
   "typing": {
-    "title": "Speed Typing",
-    "description": "Improve your typing speed with Japanese characters"
+    "title": "Mecanografía rápida",
+    "description": "Mejora tu velocidad de escritura con caracteres japoneses"
   },
   "haiku": {
-    "title": "Daily Haiku",
-    "description": "Learn through beautiful Japanese poetry"
+    "title": "Haiku diario",
+    "description": "Aprende a través de la hermosa poesía japonesa"
   }
 }

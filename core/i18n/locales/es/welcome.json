@@ -1,67 +1,67 @@
 {
-  "title": "Welcome to KanaDojo!",
-  "subtitle": "Let's personalize your learning experience",
+  "title": "¡Te damos la bienvenida a KanaDojo!",
+  "subtitle": "Personalicemos tu experiencia de aprendizaje",
   "steps": {
     "welcome": {
       "demoCta": "Prueba la demo"
     },
     "behavior": {
-      "title": "Configure Behavior",
-      "subtitle": "Set your display and sound preferences",
+      "title": "Configurar comportamiento",
+      "subtitle": "Establece tus preferencias de pantalla y sonido",
       "displayLanguage": {
-        "title": "Display Language",
-        "description": "In the character selection menu, for readings, display:",
-        "romaji": "Romaji, Translations 🇺🇸",
+        "title": "Idioma de visualización",
+        "description": "En el menú de selección de caracteres, para las lecturas, mostrar:",
+        "romaji": "Romaji, Traducciones 🇺🇸",
         "kana": "Kana, Kanji 🇯🇵"
       },
       "soundEffects": {
-        "title": "Sound Effects",
-        "description": "Play UI and feedback sound effects:",
-        "on": "On",
-        "off": "Off"
+        "title": "Efectos de sonido",
+        "description": "Reproducir efectos de sonido de la interfaz y comentarios:",
+        "on": "Activado",
+        "off": "Desactivado"
       }
     },
     "themes": {
-      "title": "Choose Your Theme",
-      "subtitle": "Select a theme that matches your style",
-      "randomTheme": "Random Theme",
-      "moreInfo": "More themes available in",
-      "preferences": "Preferences"
+      "title": "Elige tu tema",
+      "subtitle": "Selecciona un tema que se adapte a tu estilo",
+      "randomTheme": "Tema aleatorio",
+      "moreInfo": "Más temas disponibles en",
+      "preferences": "Preferencias"
     },
     "fonts": {
-      "title": "Choose Your Font",
-      "subtitle": "Choose the perfect font for characters",
-      "randomFont": "Random Font",
-      "default": "(default)",
-      "moreInfo": "More fonts available in",
-      "preferences": "Preferences"
+      "title": "Elige tu fuente",
+      "subtitle": "Elige la fuente perfecta para los caracteres",
+      "randomFont": "Fuente aleatoria",
+      "default": "(predeterminado)",
+      "moreInfo": "Más fuentes disponibles en",
+      "preferences": "Preferencias"
     },
     "complete": {
-      "title": "All Set!",
-      "subtitle": "Your KanaDojo is now personalized",
-      "canChange": "You can always change these settings later in the Preferences.",
-      "happyLearning": "Happy learning!"
+      "title": "¡Todo listo!",
+      "subtitle": "Tu KanaDojo ya está personalizado",
+      "canChange": "Siempre puedes cambiar estos ajustes más adelante en Preferencias.",
+      "happyLearning": "¡Feliz aprendizaje!"
     }
   },
   "features": {
     "behavior": {
-      "title": "Configure Behavior",
-      "description": "Set display language and sound preferences"
+      "title": "Configurar comportamiento",
+      "description": "Establece el idioma de visualización y las preferencias de sonido"
     },
     "theme": {
-      "title": "Choose Your Theme",
-      "description": "Select a theme that matches your style"
+      "title": "Elige tu tema",
+      "description": "Selecciona un tema que se adapte a tu estilo"
     },
     "font": {
-      "title": "Select Your Font",
-      "description": "Choose your perfect font for characters"
+      "title": "Selecciona tu fuente",
+      "description": "Elige tu fuente perfecta para los caracteres"
     }
   },
   "navigation": {
-    "previous": "Previous",
-    "back": "Back",
-    "next": "Next",
-    "getStarted": "Get Started",
-    "finishSetup": "Finish Setup"
+    "previous": "Anterior",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "getStarted": "Comenzar",
+    "finishSetup": "Finalizar configuración"
   }
 }

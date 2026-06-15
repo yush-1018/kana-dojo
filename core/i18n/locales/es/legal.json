@@ -1,33 +1,33 @@
 {
   "privacy": {
-    "title": "Privacy Policy",
-    "subtitle": "Your Data Protection at KanaDojo",
-    "lastUpdated": "Last updated"
+    "title": "Política de privacidad",
+    "subtitle": "Tu protección de datos en KanaDojo",
+    "lastUpdated": "Última actualización"
   },
   "terms": {
-    "title": "Terms of Service",
-    "subtitle": "KanaDojo Usage Guidelines",
-    "lastUpdated": "Last updated"
+    "title": "Condiciones del servicio",
+    "subtitle": "Directrices de uso de KanaDojo",
+    "lastUpdated": "Última actualización"
   },
   "security": {
-    "title": "Security Policy",
-    "subtitle": "How We Keep KanaDojo Safe",
-    "lastUpdated": "Last updated"
+    "title": "Política de seguridad",
+    "subtitle": "Cómo mantenemos seguro KanaDojo",
+    "lastUpdated": "Última actualización"
   },
   "credits": {
-    "title": "Credits",
-    "subtitle": "Contributors & Supporters",
+    "title": "Créditos",
+    "subtitle": "Colaboradores y patrocinadores",
     "contributors": {
-      "title": "Contributors",
-      "description": "Thank you to all our amazing contributors"
+      "title": "Colaboradores",
+      "description": "Gracias a todos nuestros increíbles colaboradores"
     },
     "sponsors": {
-      "title": "Sponsors",
-      "description": "Special thanks to our sponsors"
+      "title": "Patrocinadores",
+      "description": "Un agradecimiento especial a nuestros patrocinadores"
     },
     "openSource": {
-      "title": "Open Source",
-      "description": "Built with these amazing open source projects"
+      "title": "Código abierto",
+      "description": "Creado con estos increíbles proyectos de código abierto"
     }
   }
 }
